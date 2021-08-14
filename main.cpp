@@ -3,18 +3,16 @@
 
 using namespace std;
 
+string deleteCharacter(char, string);
+
 int main() {
-    std::cout << "Hello hola  !" << std::endl;
-    return 0;
+    cout<<deleteCharacter('c',"chocolate")<<endl;
+//hoolate
 }
 
 string deleteCharacter(char c, string chain){
-    char temp = NULL;
-    for (char & i : chain) {
-        if(i == c){
-            i = temp;
-            cout<<chain;
-        }
-    }
+    //char temp = NULL;
+    chain.erase(remove(&c));
+
     return chain;
 }
