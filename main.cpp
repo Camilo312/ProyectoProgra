@@ -9,9 +9,11 @@ using namespace std;
 int WordNumber(char sentence[ ],char word[ ]);
 string encrypt(char sentence[ ]);
 string desencripatr(char sentence[]);
+string fillCharacters(string wordString, string letters, int cant, string side);
 int main() {
     int menu;
     char sentence[ ]="Sogamoso Ciudad del Sol y del Acero";
+    string wordString ="Sogamoso Ciudad del Sol y del Acero";
     char word[ ]="del";
    cout<<"1.Convertir en nombre propio el contenido de la cadena\n2.Buscar palabra\n3.Encriptar cadena\n4.Desencriptar"
          "\n5.Llenar cacarter por izquierda o por derecha\n6.Borrar cracteres de una cadena\n7.Interseccion\n8.Diferencia entre dos cadenas"
@@ -35,7 +37,7 @@ int main() {
             }
             cout<<"La palabra "<<word<<" se necuentra "<<count<<" veces"<<endl;
             //No funciona la pasada por parametros
-            cout<<WordNumber(sentence,word)<<endl;
+            //cout<<WordNumber(sentence,word)<<endl;
             break;
         case 3:
             for (int i = 0; i < strlen(sentence); ++i) {
@@ -46,7 +48,6 @@ int main() {
             //cout<<encrypt(sentence)<<endl;
             break;
         case 4:
-
             for (int i = 0; i < strlen(sentence); ++i) {
                 sentence[i] = (char)(sentence[i]-(char)8);
             }
@@ -55,6 +56,7 @@ int main() {
             //cout<< desencripatr(sentence)<<endl;
             break;
         case 5:
+            cout<<fillCharacters(wordString,"a",5,"izquierda")<<endl;
             break;
         case 6:
             break;
@@ -101,4 +103,20 @@ string desencripatr(char sentence[]){
         sentence[i] = (char)(sentence[i]-(char)8);
     }
     return sentence;
+}
+
+//Llenar caracteres por izquierda o por derecha
+string fillCharacters(string wordString, string letters, int cant, string side){
+    string z = "", b = "";
+    string finalSentence = "";
+    for (int i = 0; i < cant; i++) {
+        b = letters;
+        z += b;
+    }
+    if (side==("izquierda")) {
+        finalSentence = z + wordString;
+    } else if (side==("derecha")) {
+        finalSentence = wordString + z;
+    }
+    return finalSentence;
 }
