@@ -16,8 +16,8 @@ string deleteCharacterDirection(string, string, int);
 bool isvalidEmail(string);
 
 int main() {
-    string test = "oae";
-    const string chain1 = "Sogamoso Ciudad del Sol y del Acero";
+    char test[] = "oae";
+    const char chain1[] = "Sogamoso Ciudad del Sol y del Acero";
     cout<<deleteCharacter(test,chain1)<<endl;
     cout<<intersection(chain1,"colombia")<<endl;
     cout<<diference(chain1,"colombia")<<endl;
