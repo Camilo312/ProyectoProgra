@@ -17,10 +17,10 @@ bool isvalidEmail(string);
 
 int main() {
     const string chain1 = "Sogamoso Ciudad del Sol y del Acero";
-//    cout<<deleteCharacter('o',chain1)<<endl;
-//    cout<<intersection(chain1,"colombia")<<endl;
-//    cout<<diference(chain1,"colombia")<<endl;
-    //cout << deleteCharacterDirection(chain1, "Acero", 2);
+    cout<<deleteCharacter('o',chain1)<<endl;
+    cout<<intersection(chain1,"colombia")<<endl;
+    cout<<diference(chain1,"colombia")<<endl;
+    cout << deleteCharacterDirection(chain1, "Acero", 2)<<endl;
     cout<<isvalidEmail("camilo@mail.com");
 
 }
