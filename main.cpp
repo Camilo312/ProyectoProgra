@@ -5,7 +5,7 @@
 
 using namespace std;
 
-string deleteCharacter(char, string);
+string deleteCharacter(string, string);
 
 string intersection(string, string);
 
@@ -16,8 +16,9 @@ string deleteCharacterDirection(string, string, int);
 bool isvalidEmail(string);
 
 int main() {
+    string test = "oae";
     const string chain1 = "Sogamoso Ciudad del Sol y del Acero";
-    cout<<deleteCharacter('o',chain1)<<endl;
+    cout<<deleteCharacter(test,chain1)<<endl;
     cout<<intersection(chain1,"colombia")<<endl;
     cout<<diference(chain1,"colombia")<<endl;
     cout << deleteCharacterDirection(chain1, "Acero", 2)<<endl;
@@ -25,9 +26,11 @@ int main() {
 
 }
 
-string deleteCharacter(char c, string chain) {
+string deleteCharacter(string c, string chain) {
     for (int i = 0; i < chain.length(); ++i) {
-        if (chain[i] == c) chain.erase(i, 1);
+        for (char x:c) {
+            if (chain[i] == x) chain.erase(i, 1);
+        }
     }
     return chain;
 }
@@ -53,7 +56,7 @@ string diference(string chain1, string chain2) {
     for (char c: chain2) {
         for (char k: chain1) {
             if (c == k) {
-                aux = deleteCharacter(k, aux);
+                aux = deleteCharacter(to_string(k), aux);
             }
         }
     }
