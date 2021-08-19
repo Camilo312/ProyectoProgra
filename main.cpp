@@ -4,13 +4,13 @@
 
 using namespace std;
 
-int WordNumber(string sentence, string word);
+int WordNumber(string, string);
 
-string encrypt(string sentence);
+string encrypt(string);
 
-string desencriptar(string sentence);
+string desencriptar(string);
 
-string fillCharacters(string wordString, string letters, int cant, string side);
+string fillCharacters(string, string, int, string);
 
 
 int main() {
@@ -40,7 +40,7 @@ int main() {
         case 2:
             cout << "Ingrese la palabra a buscar:\n--------------------------------" << endl;
             cin >> word;
-            cout<<WordNumber(wordString, word);
+            cout << WordNumber(wordString, word);
             break;
         case 3:
             cout << "La oracion " << wordString << " encriptada es: " << encrypt(wordString);
@@ -58,7 +58,7 @@ int main() {
             cin >> cant;
             cout << "Ingrese si desea llenar los caracteres por izquierda o por derecha: (i/d) " << endl;
             cin >> side;
-            cout<<"La cadena queda asi: "<<fillCharacters(wordString, letters, cant, side)<<endl;
+            cout << "La cadena queda asi: " << fillCharacters(wordString, letters, cant, side) << endl;
         case 6:
 
             break;
