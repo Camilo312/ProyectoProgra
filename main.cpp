@@ -1,121 +1,119 @@
 #include <iostream>
 #include <string>
-#include <stdlib.h>
-#include <stdio.h>
 #include <cstring>
 
 using namespace std;
 
-int WordNumber(char sentence[ ],char word[ ]);
-string encrypt(char sentence[ ]);
-string desencripatr(char sentence[]);
+int WordNumber(string sentence, string word);
+
+string encrypt(string sentence);
+
+string desencriptar(string sentence);
+
 string fillCharacters(string wordString, string letters, int cant, string side);
+
+
 int main() {
     int menu;
-    char sentence[ ]="Sogamoso Ciudad del Sol y del Acero";
-    string wordString ="Sogamoso Ciudad del Sol y del Acero";
-    char word[ ]="del";
-   cout<<"1.Convertir en nombre propio el contenido de la cadena\n2.Buscar palabra\n3.Encriptar cadena\n4.Desencriptar"
-         "\n5.Llenar cacarter por izquierda o por derecha\n6.Borrar cracteres de una cadena\n7.Interseccion\n8.Diferencia entre dos cadenas"
-         "\n9.Borrar caracteres iziquierda o derecha\n"
-         "10.Validar correo electronico\n11.Salir"<<endl;
-   cin>>menu;
-
+    char op;
+    string word;
+    string stringencrypted;
+    string letters;
+    string side;
+    int cant;
+    string wordString = "Sogamoso Ciudad del Sol y del Acero";
+    cout
+            << "1.Convertir en nombre propio el contenido de la cadena\n2.Buscar palabra\n3.Encriptar cadena\n4.Desencriptar"
+               "\n5.Llenar cacarter por izquierda o por derecha\n6.Borrar cracteres de una cadena\n7.Interseccion\n8.Diferencia entre dos cadenas"
+               "\n9.Borrar caracteres iziquierda o derecha\n"
+               "10.Validar correo electronico\n11.Salir\n--------------------------------" << endl;
+    cin >> menu;
+    cout << "Desea utilizar la oracion por defecto?(y/n)\n--------------------------------" << endl;
+    cin >> op;
+    if (op == 'n') {
+        cout << "Ingrese la oracion:\n--------------------------------" << endl;
+        cin >> wordString;
+    }
     switch (menu) {
-        case 1:
+        case 1 :
             break;
         case 2:
-            int count;
-            char *tok;
-            tok = strtok(sentence," .,:;");
-            count=0;
-            while(tok != NULL){
-                if(stricmp(tok,word)==0){
-                    count++;
-                }
-                tok = strtok(NULL," .,:;");
-            }
-            cout<<"La palabra "<<word<<" se necuentra "<<count<<" veces"<<endl;
-            //No funciona la pasada por parametros
-            //cout<<WordNumber(sentence,word)<<endl;
+            cout << "Ingrese la palabra a buscar:\n--------------------------------" << endl;
+            cin >> word;
+            cout<<WordNumber(wordString, word);
             break;
         case 3:
-            for (int i = 0; i < strlen(sentence); ++i) {
-                sentence[i] = (char)(sentence[i]+(char)8);
-            }
-            cout<<"Encriptacion de la cadena "<<sentence<<endl;
-            //No funciona la pasada por parametros
-            //cout<<encrypt(sentence)<<endl;
+            cout << "La oracion " << wordString << " encriptada es: " << encrypt(wordString);
             break;
         case 4:
-            for (int i = 0; i < strlen(sentence); ++i) {
-                sentence[i] = (char)(sentence[i]-(char)8);
-            }
-            cout<<"Desencriptacion de la cadena "<<sentence<<endl;
-            //No funciona la pasado por parametros
-            //cout<< desencripatr(sentence)<<endl;
+            cout << "Debe encriptar primero una oracion, ingrese una a encriptar" << endl;
+            cin >> stringencrypted;
+            cout << "La oracion encriptada es: " << encrypt(stringencrypted) << endl;
+            cout << "La oracion desencriptada es: " << desencriptar(stringencrypted) << endl;
             break;
         case 5:
-            cout<<fillCharacters(wordString,"a",5,"izquierda")<<endl;
-            break;
+            cout << "Digite las letras a rellenar en la oracion:" << endl;
+            cin >> letters;
+            cout << "Ingrese la cantidad de letras con las que se va a rellenar" << endl;
+            cin >> cant;
+            cout << "Ingrese si desea llenar los caracteres por izquierda o por derecha: (i/d) " << endl;
+            cin >> side;
+            cout<<"La cadena queda asi: "<<fillCharacters(wordString, letters, cant, side)<<endl;
         case 6:
-            break;
-        case 7:
-            break;
-        case 8:
-            break;
-        case 9:
-            break;
-        case 10:
-            break;
-        case 11:
-            exit(0);
+
             break;
     }
+
     return 0;
 }
-//Contar el numero de veces que existe una palabra en una cadena
-int WordNumber(char sentence[ ],char word[ ]){
-    int count=0;
-    char *tok;
 
-    tok = strtok(sentence," .,:;");
-    while(tok != NULL){
-        if(stricmp(tok,word)==0){
+
+//Contar el numero de veces que existe una palabra en una cadena
+int WordNumber(string chain, string word) {
+    char chainaux[chain.length() + 1];
+    char wordaux[word.length() + 1];
+    strcpy(chainaux, chain.c_str());
+    strcpy(wordaux, word.c_str());
+    int count = 0;
+    char *tok;
+    tok = strtok(chainaux, " .,:;");
+    while (tok != NULL) {
+        if (stricmp(tok, wordaux) == 0) {
+            cout << "entro";
             count++;
         }
-        tok = strtok(NULL," .,:;");
+        tok = strtok(NULL, " .,:;");
     }
     return count;
 }
 
 //Encriptar
-string encrypt(char sentence[]){
-    for (int i = 0; i < strlen(sentence); ++i) {
-        sentence[i] = (char)(sentence[i]+(char)8);
+string encrypt(string sentence) {
+    for (int i = 0; i < sentence.length(); ++i) {
+        sentence[i] = (char) (sentence[i] + (char) 8);
     }
     return sentence;
 }
 
 //Desencriptar
-string desencripatr(char sentence[]){
-    for (int i = 0; i < strlen(sentence); ++i) {
-        sentence[i] = (char)(sentence[i]-(char)8);
+string desencriptar(string sentence) {
+    for (int i = 0; i < sentence.length(); ++i) {
+        sentence[i] = (char) (sentence[i] - (char) 8);
     }
     return sentence;
 }
 
 //Llenar caracteres por izquierda o por derecha
-string fillCharacters(string wordString, string letters, int cant, string side){
+string fillCharacters(string wordString, string letters, int cant, string side) {
     string z = "", b = "";
     string finalSentence = "";
     for (int i = 0; i < cant; i++) {
         b = letters;
         z += b;
     }
-    if (side==("izquierda")) {
+    if (side == ("i")) {
         finalSentence = z + wordString;
-    } else if (side==("derecha")) {
+    } else if (side == ("d")) {
         finalSentence = wordString + z;
     }
     return finalSentence;
