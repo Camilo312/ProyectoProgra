@@ -7,7 +7,7 @@
 using namespace std;
 
 int WordNumber(string, string);
-
+//j
 string encrypt(string);
 
 string decrypt(string);
