@@ -104,6 +104,14 @@ void menu() {
             cout << "El resultado es: " << deleteCharacter(characters, wordString) << endl;
             break;
         }
+        case 7:
+            string chain2;
+            cout << "La oracion 1 es: " << wordString << endl;
+            cout << "Ingrese la oracion 2: " << endl;
+
+            cin >> chain2;
+            cout << "La interseccion de las oraciones es: " << intersection(wordString, chain2) << endl;
+            break;
 
             break;
     }
@@ -173,6 +181,7 @@ string fillCharacters(string wordString, string letters, int cant, string side) 
     return finalSentence;
 }
 
+//Elimina los caracteres de una cadena
 string deleteCharacter(string c, string chain) {
     for (int i = 0; i < chain.length(); ++i) {
         for (char x:c) {
@@ -182,6 +191,7 @@ string deleteCharacter(string c, string chain) {
     return chain;
 }
 
+//Intersecta los caracteres que coinciden en dos cadenas
 string intersection(string chain1, string chain2) {
     string aux;
     for (char c: chain2) {
