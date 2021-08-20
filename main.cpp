@@ -12,7 +12,7 @@ string desencriptar(string);
 
 string fillCharacters(string, string, int, string);
 
-
+string nombrePropio(string sentence);
 int main() {
     int menu;
     char op;
@@ -21,7 +21,7 @@ int main() {
     string letters;
     string side;
     int cant;
-    string wordString = "Sogamoso Ciudad del Sol y del Acero";
+    string wordString = "sogamoso ciudad del sol y del acero";
     cout
             << "1.Convertir en nombre propio el contenido de la cadena\n2.Buscar palabra\n3.Encriptar cadena\n4.Desencriptar"
                "\n5.Llenar cacarter por izquierda o por derecha\n6.Borrar cracteres de una cadena\n7.Interseccion\n8.Diferencia entre dos cadenas"
@@ -36,6 +36,7 @@ int main() {
     }
     switch (menu) {
         case 1 :
+            cout<<nombrePropio(wordString)<<endl;
             break;
         case 2:
             cout << "Ingrese la palabra a buscar:\n--------------------------------" << endl;
@@ -66,7 +67,17 @@ int main() {
 
     return 0;
 }
-
+string nombrePropio(string sentence){
+    char sentenceAux[sentence.length()+1];
+    strcpy(sentenceAux, sentence.c_str());
+    for (int i = 0; i < strlen(sentenceAux)-2; ++i) {
+        if (sentenceAux[i] ==' ' || sentenceAux[i] =='.' || sentenceAux[i] ==',' || sentenceAux[i] =='y'){
+            sentenceAux[0]= toupper(sentenceAux[0]);
+            sentenceAux[i+1] =toupper(sentenceAux[i+1]);
+        }
+    }
+    return sentenceAux;
+}
 
 //Contar el numero de veces que existe una palabra en una cadena
 int WordNumber(string chain, string word) {
