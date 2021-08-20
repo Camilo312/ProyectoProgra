@@ -26,46 +26,67 @@ string deleteCharacterDirection(string, string, int);
 
 bool isvalidEmail(string);
 
+void menu();
+
 int main() {
-    int menu;
-    char op;
-    string word;
-    string stringencrypted;
-    string letters;
-    string side;
-    int cant;
+    menu();
+    return 0;
+}
+
+void menu() {
     string wordString = "sogamoso ciudad del sol y del acero";
+    int menu, cant;
+    char op;
+
     cout
             << "1.Convertir en nombre propio el contenido de la cadena\n2.Buscar palabra\n3.Encriptar cadena\n4.Desencriptar"
                "\n5.Llenar cacarter por izquierda o por derecha\n6.Borrar cracteres de una cadena\n7.Interseccion\n8.Diferencia entre dos cadenas"
                "\n9.Borrar caracteres iziquierda o derecha\n"
-               "10.Validar correo electronico\n11.Salir\n--------------------------------" << endl;
+               "10.Validar correo electronico\n11.Salir\n-----------------------------------------------------------"
+            << endl;
+
     cin >> menu;
-    cout << "Desea utilizar la oracion por defecto?(y/n)\n--------------------------------" << endl;
+
+    cout << "Desea utilizar la oracion por defecto?(y/n)\n-----------------------------------------------------------"
+         << endl;
+
     cin >> op;
+
     if (op == 'n') {
-        cout << "Ingrese la oracion:\n--------------------------------" << endl;
+        cout << "Ingrese la oracion:\n-----------------------------------------------------------" << endl;
         cin >> wordString;
     }
+
     switch (menu) {
         case 1 :
-            cout<<nombrePropio(wordString)<<endl;
+            cout << nombrePropio(wordString) << endl;
             break;
-        case 2:
-            cout << "Ingrese la palabra a buscar:\n--------------------------------" << endl;
+        case 2: {
+            string word;
+            cout << "Ingrese la palabra a buscar:" << endl;
             cin >> word;
-            cout << WordNumber(wordString, word);
+            cout << "Se ha encontrado: " << WordNumber(wordString, word) << " veces la palabra: " << word << endl;
             break;
-        case 3:
+        }
+        case 3: {
+            char desenc;
             cout << "La oracion " << wordString << " encriptada es: " << encrypt(wordString);
+            cout << "Desea desencriptar la oracion?(y/n)" << endl;
+            cin >> desenc;
+            if (desenc == 'y' or desenc == 'Y') {
+                cout << "La oracion desencriptada es: " << desencriptar(wordString) << endl;
+            }
             break;
-        case 4:
-            cout << "Debe encriptar primero una oracion, ingrese una a encriptar" << endl;
-            cin >> stringencrypted;
-            cout << "La oracion encriptada es: " << encrypt(stringencrypted) << endl;
-            cout << "La oracion desencriptada es: " << desencriptar(stringencrypted) << endl;
+        }
+        case 4: {
+            string desencripted = encrypt(wordString);
+            cout << "La oracion encriptada es: " << desencripted << endl;
+            cout << "La oracion desencriptada es: " << desencriptar(desencripted) << endl;
             break;
-        case 5:
+        }
+        case 5: {
+            string letters;
+            string side;
             cout << "Digite las letras a rellenar en la oracion:" << endl;
             cin >> letters;
             cout << "Ingrese la cantidad de letras con las que se va a rellenar" << endl;
@@ -73,20 +94,29 @@ int main() {
             cout << "Ingrese si desea llenar los caracteres por izquierda o por derecha: (i/d) " << endl;
             cin >> side;
             cout << "La cadena queda asi: " << fillCharacters(wordString, letters, cant, side) << endl;
-        case 6:
+            break;
+        }
+        case 6: {
+            string characters;
+            cout << "Ingrese los caracteres a eliminar:" << endl;
+            cin >> characters;
+            cout << "Se han eliminado los caracteres " << characters << "de la oracion" << wordString << endl;
+            cout << "El resultado es: " << deleteCharacter(characters, wordString) << endl;
+            break;
+        }
 
             break;
     }
-
-    return 0;
 }
-string nombrePropio(string sentence){
-    char sentenceAux[sentence.length()+1];
+
+
+string nombrePropio(string sentence) {
+    char sentenceAux[sentence.length() + 1];
     strcpy(sentenceAux, sentence.c_str());
-    for (int i = 0; i < strlen(sentenceAux)-2; ++i) {
-        if (sentenceAux[i] ==' ' || sentenceAux[i] =='.' || sentenceAux[i] ==',' || sentenceAux[i] =='y'){
-            sentenceAux[0]= toupper(sentenceAux[0]);
-            sentenceAux[i+1] =toupper(sentenceAux[i+1]);
+    for (int i = 0; i < strlen(sentenceAux) - 2; ++i) {
+        if (sentenceAux[i] == ' ' || sentenceAux[i] == '.' || sentenceAux[i] == ',' || sentenceAux[i] == 'y') {
+            sentenceAux[0] = toupper(sentenceAux[0]);
+            sentenceAux[i + 1] = toupper(sentenceAux[i + 1]);
         }
     }
     return sentenceAux;
@@ -198,7 +228,7 @@ string deleteCharacterDirection(string chain1, string chain2, int dir) {
     return aux;
 }
 
-bool isvalidEmail(string email){
+bool isvalidEmail(string email) {
     const regex expresion("([a-z]+)([_.a-z0-9]*)([a-z0-9]+)(@)([a-z]+)([.a-z]+)([a-z]+)");
-    return regex_match(email,expresion);
+    return regex_match(email, expresion);
 }
