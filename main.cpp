@@ -10,7 +10,7 @@ int WordNumber(string, string);
 
 string encrypt(string);
 
-string desencriptar(string);
+string decrypt(string);
 
 string fillCharacters(string, string, int, string);
 
@@ -38,6 +38,15 @@ void menu() {
     int menu, cant;
     char op;
 
+    cout<<"Oracion por defecto: "<<wordString;
+    cout << "Desea utilizar la oracion por defecto?(y/n)\n-----------------------------------------------------------"
+         << endl;
+    cin >> op;
+    if (op == 'n') {
+        cout << "Ingrese la oracion:\n-----------------------------------------------------------" << endl;
+        cin >> wordString;
+    }
+    do{
     cout
             << "1.Convertir en nombre propio el contenido de la cadena\n2.Buscar palabra\n3.Encriptar cadena\n4.Desencriptar"
                "\n5.Llenar cacarter por izquierda o por derecha\n6.Borrar cracteres de una cadena\n7.Interseccion\n8.Diferencia entre dos cadenas"
@@ -46,16 +55,6 @@ void menu() {
             << endl;
 
     cin >> menu;
-
-    cout << "Desea utilizar la oracion por defecto?(y/n)\n-----------------------------------------------------------"
-         << endl;
-
-    cin >> op;
-
-    if (op == 'n') {
-        cout << "Ingrese la oracion:\n-----------------------------------------------------------" << endl;
-        cin >> wordString;
-    }
 
     switch (menu) {
         case 1 :
@@ -74,14 +73,14 @@ void menu() {
             cout << "Desea desencriptar la oracion?(y/n)" << endl;
             cin >> desenc;
             if (desenc == 'y' or desenc == 'Y') {
-                cout << "La oracion desencriptada es: " << desencriptar(wordString) << endl;
+                cout << "La oracion desencriptada es: " << decrypt(wordString) << endl;
             }
             break;
         }
         case 4: {
             string desencripted = encrypt(wordString);
             cout << "La oracion encriptada es: " << desencripted << endl;
-            cout << "La oracion desencriptada es: " << desencriptar(desencripted) << endl;
+            cout << "La oracion desencriptada es: " << decrypt(desencripted) << endl;
             break;
         }
         case 5: {
@@ -104,7 +103,7 @@ void menu() {
             cout << "El resultado es: " << deleteCharacter(characters, wordString) << endl;
             break;
         }
-        case 7:
+        case 7: {
             string chain2;
             cout << "La oracion 1 es: " << wordString << endl;
             cout << "Ingrese la oracion 2: " << endl;
@@ -112,9 +111,34 @@ void menu() {
             cin >> chain2;
             cout << "La interseccion de las oraciones es: " << intersection(wordString, chain2) << endl;
             break;
-
+        }
             break;
+        case 8:{
+            string chain2;
+            cout << "La oracion 1 es: " << wordString << endl;
+            cout << "Ingrese la oracion 2: " << endl;
+
+            cin >> chain2;
+            cout << "La difrencia entre las dos cadenas es: " << diference(wordString, chain2) << endl;
+            break;
+        }
+
+        case 9:
+            break;
+        case 10:{
+            string email;
+            cout<<"Digite correo electronico: "<<endl;
+            cin>>email;
+            cout<<isvalidEmail(email);
+        }
+            break;
+        case 11:
+            cout<<" Se ha salido "<<endl;
+            exit(0);
+            break;
+
     }
+    }while(menu !=11);
 }
 
 
@@ -149,7 +173,7 @@ int WordNumber(string chain, string word) {
     return count;
 }
 
-//Encriptar
+//Encriptar una cadena de caracteres
 string encrypt(string sentence) {
     for (int i = 0; i < sentence.length(); ++i) {
         sentence[i] = (char) (sentence[i] + (char) 8);
@@ -157,8 +181,8 @@ string encrypt(string sentence) {
     return sentence;
 }
 
-//Desencriptar
-string desencriptar(string sentence) {
+//Desencriptar una cadena de caracteres
+string decrypt(string sentence) {
     for (int i = 0; i < sentence.length(); ++i) {
         sentence[i] = (char) (sentence[i] - (char) 8);
     }
@@ -208,6 +232,7 @@ string intersection(string chain1, string chain2) {
     return aux;
 }
 
+//Se mira la diferncia entre dos cadenas de caracteres
 string diference(string chain1, string chain2) {
     string aux = chain1;
     for (char c: chain2) {
@@ -220,6 +245,7 @@ string diference(string chain1, string chain2) {
 
     return aux;
 }
+
 
 string deleteCharacterDirection(string chain1, string chain2, int dir) {
     if (dir == 2) {
@@ -238,6 +264,7 @@ string deleteCharacterDirection(string chain1, string chain2, int dir) {
     return aux;
 }
 
+//Validar correo electronico
 bool isvalidEmail(string email) {
     const regex expresion("([a-z]+)([_.a-z0-9]*)([a-z0-9]+)(@)([a-z]+)([.a-z]+)([a-z]+)");
     return regex_match(email, expresion);
