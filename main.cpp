@@ -38,7 +38,7 @@ void menu() {
     int menu, cant;
     char op;
 
-    cout<<"Oracion por defecto: "<<wordString;
+    cout<<"Oracion por defecto: "<<wordString<<endl;
     cout << "Desea utilizar la oracion por defecto?(y/n)\n-----------------------------------------------------------"
          << endl;
     cin >> op;
@@ -117,12 +117,10 @@ void menu() {
             string chain2;
             cout << "La oracion 1 es: " << wordString << endl;
             cout << "Ingrese la oracion 2: " << endl;
-
             cin >> chain2;
             cout << "La difrencia entre las dos cadenas es: " << diference(wordString, chain2) << endl;
             break;
         }
-
         case 9:
             break;
         case 10:{
