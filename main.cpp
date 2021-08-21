@@ -12,9 +12,9 @@ string encrypt(string);
 
 string decrypt(string);
 
-string fillCharacters(string, string, int, string);
+string fillCharacters(string, string, int, char);
 
-string nombrePropio(string sentence);
+string ownName(string sentence);
 
 string deleteCharacter(string, string);
 
@@ -22,125 +22,143 @@ string intersection(string, string);
 
 string diference(string, string);
 
-string deleteCharacterDirection(string, string, int);
+string deleteCharacterDirection(string, string, char);
 
-bool isvalidEmail(string);
+string isvalidEmail(string);
 
 void menu();
 
 int main() {
-    menu();
-    return 0;
-}
-
-void menu() {
     string wordString = "sogamoso ciudad del sol y del acero";
+    char ex = 0;
     int menu, cant;
     char op;
 
     cout<<"Oracion por defecto: "<<wordString<<endl;
     cout << "Desea utilizar la oracion por defecto?(y/n)\n-----------------------------------------------------------"
-         << endl;
+    << endl;
     cin >> op;
     if (op == 'n') {
         cout << "Ingrese la oracion:\n-----------------------------------------------------------" << endl;
         cin >> wordString;
     }
     do{
-    cout
-            << "1.Convertir en nombre propio el contenido de la cadena\n2.Buscar palabra\n3.Encriptar cadena\n4.Desencriptar"
-               "\n5.Llenar cacarter por izquierda o por derecha\n6.Borrar cracteres de una cadena\n7.Interseccion\n8.Diferencia entre dos cadenas"
-               "\n9.Borrar caracteres iziquierda o derecha\n"
-               "10.Validar correo electronico\n11.Salir\n-----------------------------------------------------------"
-            << endl;
+        cout << "1.Convertir en nombre propio el contenido de la cadena\n2.Buscar palabra\n3.Encriptar cadena\n4.Desencriptar"
+                "\n5.Llenar cacarter por izquierda o por derecha\n6.Borrar cracteres de una cadena\n7.Interseccion\n8.Diferencia entre dos cadenas"
+                "\n9.Borrar caracteres iziquierda o derecha\n"
+                "10.Validar correo electronico\n11.Salir\n-----------------------------------------------------------"
+                << endl;
 
-    cin >> menu;
+        cin >> menu;
 
-    switch (menu) {
-        case 1 :
-            cout << nombrePropio(wordString) << endl;
-            break;
-        case 2: {
-            string word;
-            cout << "Ingrese la palabra a buscar:" << endl;
-            cin >> word;
-            cout << "Se ha encontrado: " << WordNumber(wordString, word) << " veces la palabra: " << word << endl;
-            break;
-        }
-        case 3: {
-            char desenc;
-            cout << "La oracion " << wordString << " encriptada es: " << encrypt(wordString);
-            cout << "Desea desencriptar la oracion?(y/n)" << endl;
-            cin >> desenc;
-            if (desenc == 'y' or desenc == 'Y') {
-                cout << "La oracion desencriptada es: " << decrypt(wordString) << endl;
-            }
-            break;
-        }
-        case 4: {
-            string desencripted = encrypt(wordString);
-            cout << "La oracion encriptada es: " << desencripted << endl;
-            cout << "La oracion desencriptada es: " << decrypt(desencripted) << endl;
-            break;
-        }
-        case 5: {
-            string letters;
-            string side;
-            cout << "Digite las letras a rellenar en la oracion:" << endl;
-            cin >> letters;
-            cout << "Ingrese la cantidad de letras con las que se va a rellenar" << endl;
-            cin >> cant;
-            cout << "Ingrese si desea llenar los caracteres por izquierda o por derecha: (i/d) " << endl;
-            cin >> side;
-            cout << "La cadena queda asi: " << fillCharacters(wordString, letters, cant, side) << endl;
-            break;
-        }
-        case 6: {
-            string characters;
-            cout << "Ingrese los caracteres a eliminar:" << endl;
-            cin >> characters;
-            cout << "Se han eliminado los caracteres " << characters << "de la oracion" << wordString << endl;
-            cout << "El resultado es: " << deleteCharacter(characters, wordString) << endl;
-            break;
-        }
-        case 7: {
-            string chain2;
-            cout << "La oracion 1 es: " << wordString << endl;
-            cout << "Ingrese la oracion 2: " << endl;
+        switch (menu) {
+            case 1 :
+                cout << ownName(wordString) << endl;
+                break;
+                case 2: {
+                    string word;
+                    cout << "Ingrese la palabra a buscar:" << endl;
+                    cin >> word;
+                    cout << "Se ha encontrado: " << WordNumber(wordString, word) << " veces la palabra: " << word << endl;
+                    break;
+                }
+                case 3: {
+                    char desenc;
+                    string encripted = encrypt(wordString);
+                    cout << "La oracion " << wordString << " encriptada es: " << encripted <<endl;
+                    cout << "Desea desencriptar la oracion?(y/n)" << endl;
+                    cin >> desenc;
+                    if (tolower(desenc) == 'y') {
+                        cout << "La oracion desencriptada es: " << decrypt(encripted) << endl;
+                    }
+                    break;
+                }
+                case 4: {
+                    char x;
+                    string chain;
+                    cout << "Tiene una cadena encriptada?, en caso de no tener una se desencriptara la oracion por defecto(y/n)"<<endl;
+                    cin >> x;
+                    if (tolower(x) == 'y'){
+                        cout<<"Ingrese la cadena"<<endl;
+                        cin>>chain;
+                        cout << "La oracion desencriptada es: " << decrypt(chain) << endl;
+                    }else{
+                        string encripted = encrypt(wordString);
+                        cout<<"La oracion por defecto encriptada es: "<< encripted<<endl;
+                        cout << "La oracion desencriptada es: " << decrypt(encripted) << endl;
+                    }
+                    break;
+                }
+                case 5: {
+                    string letters;
+                    char side;
+                    cout << "Digite las letras a rellenar en la oracion:" << endl;
+                    cin >> letters;
+                    cout << "Ingrese la cantidad de letras con las que se va a rellenar" << endl;
+                    cin >> cant;
+                    cout << "Ingrese si desea llenar los caracteres por izquierda o por derecha: (i/d) " << endl;
+                    cin >> side;
+                    cout << "La cadena queda asi: " << fillCharacters(wordString, letters, cant, side) << endl;
+                    break;
+                }
+                case 6: {
+                    string characters;
+                    cout << "Ingrese los caracteres a eliminar:" << endl;
+                    cin >> characters;
+                    cout << "Se han eliminado los caracteres " << characters << "de la oracion" << wordString << endl;
+                    cout << "El resultado es: " << deleteCharacter(characters, wordString) << endl;
+                    break;
+                }
+                case 7: {
+                    string chain2;
+                    cout << "La oracion 1 es: " << wordString << endl;
+                    cout << "Ingrese la oracion 2: " << endl;
 
-            cin >> chain2;
-            cout << "La interseccion de las oraciones es: " << intersection(wordString, chain2) << endl;
-            break;
-        }
-            break;
-        case 8:{
-            string chain2;
-            cout << "La oracion 1 es: " << wordString << endl;
-            cout << "Ingrese la oracion 2: " << endl;
-            cin >> chain2;
-            cout << "La difrencia entre las dos cadenas es: " << diference(wordString, chain2) << endl;
-            break;
-        }
-        case 9:
-            break;
-        case 10:{
-            string email;
-            cout<<"Digite correo electronico: "<<endl;
-            cin>>email;
-            cout<<isvalidEmail(email);
-        }
-            break;
-        case 11:
-            cout<<" Se ha salido "<<endl;
-            exit(0);
-            break;
+                    cin >> chain2;
+                    cout << "La interseccion de las oraciones es: " << intersection(wordString, chain2) << endl;
+                    break;
+                }
+                break;
+                case 8:{
+                    string chain2;
+                    cout << "La oracion 1 es: " << wordString << endl;
+                    cout << "Ingrese la oracion 2: " << endl;
+                    cin >> chain2;
+                    cout << "La difrencia entre las dos cadenas es: " << diference(wordString, chain2) << endl;
+                    break;
+                }
+                case 9:{
+                    string chain;
+                    char side;
+                    cout<<"Ingrese la cadena a eliminar: "<<endl;
+                    cin>>chain;
+                    cout << "Ingrese si desea eliminar la cadena por izquierda o por derecha: (i/d) " << endl;
+                    cin >> side;
+                    cout<<"La cadena eliminada: "<<deleteCharacterDirection(wordString,chain,side)<<endl;
+                    break;
+                }
+                case 10:{
+                    string email;
+                    cout<<"Digite correo electronico: "<<endl;
+                    cin>>email;
+                    cout<<"El correo "<<email<<" "<<isvalidEmail(email)<<endl;
+                    break;
+                }
+                default:
+                    cout<<" Se ha salido "<<endl;
+                    exit(0);
 
-    }
-    }while(menu !=11);
+        }
+        cout<<"Desea volver a utilizar el programa?(y/n)"<<endl;
+        cin>>ex;
+
+        ex = tolower(ex)=='n' ? -1 : 0;
+
+    }while(ex == 0);
+    return 0;
 }
 
-
-string nombrePropio(string sentence) {
+string ownName(string sentence) {
     char sentenceAux[sentence.length() + 1];
     strcpy(sentenceAux, sentence.c_str());
     for (int i = 0; i < strlen(sentenceAux) - 2; ++i) {
@@ -163,7 +181,6 @@ int WordNumber(string chain, string word) {
     tok = strtok(chainaux, " .,:;");
     while (tok != NULL) {
         if (stricmp(tok, wordaux) == 0) {
-            cout << "entro";
             count++;
         }
         tok = strtok(NULL, " .,:;");
@@ -188,16 +205,16 @@ string decrypt(string sentence) {
 }
 
 //Llenar caracteres por izquierda o por derecha
-string fillCharacters(string wordString, string letters, int cant, string side) {
+string fillCharacters(string wordString, string letters, int cant, char side) {
     string z = "", b = "";
     string finalSentence = "";
     for (int i = 0; i < cant; i++) {
         b = letters;
         z += b;
     }
-    if (side == ("i")) {
+    if (tolower(side) == 'i') {
         finalSentence = z + wordString;
-    } else if (side == ("d")) {
+    } else if (tolower(side) == 'd') {
         finalSentence = wordString + z;
     }
     return finalSentence;
@@ -207,7 +224,7 @@ string fillCharacters(string wordString, string letters, int cant, string side) 
 string deleteCharacter(string c, string chain) {
     for (int i = 0; i < chain.length(); ++i) {
         for (char x:c) {
-            if (chain[i] == x) chain.erase(i, 1);
+            if (tolower(chain[i]) == tolower(x)) chain.erase(i, 1);
         }
     }
     return chain;
@@ -236,7 +253,7 @@ string diference(string chain1, string chain2) {
     for (char c: chain2) {
         for (char k: chain1) {
             if (c == k) {
-                aux = deleteCharacter(to_string(k), aux);
+                aux = deleteCharacter(string(1,k), aux);
             }
         }
     }
@@ -244,9 +261,9 @@ string diference(string chain1, string chain2) {
     return aux;
 }
 
-
-string deleteCharacterDirection(string chain1, string chain2, int dir) {
-    if (dir == 2) {
+//Borra la cadena dependiendo de la direccion y si coincide
+string deleteCharacterDirection(string chain1, string chain2, char dir) {
+    if (tolower(dir) == 'd') {
         reverse(chain1.begin(), chain1.end());
         reverse(chain2.begin(), chain2.end());
     }
@@ -257,13 +274,13 @@ string deleteCharacterDirection(string chain1, string chain2, int dir) {
         }
     }
 
-    if (dir == 2) reverse(aux.begin(), aux.end());
+    if (tolower(dir) == 'd') reverse(aux.begin(), aux.end());
 
     return aux;
 }
 
 //Validar correo electronico
-bool isvalidEmail(string email) {
+string isvalidEmail(string email) {
     const regex expresion("([a-z]+)([_.a-z0-9]*)([a-z0-9]+)(@)([a-z]+)([.a-z]+)([a-z]+)");
-    return regex_match(email, expresion);
+    return regex_match(email, expresion)?"Valido":"Invalido";
 }
