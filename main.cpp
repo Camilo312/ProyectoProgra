@@ -57,7 +57,7 @@ int main() {
                     string word;
                     cout << "Ingrese la palabra a buscar:" << endl;
                     cin >> word;
-                    cout << "Se ha encontrado: " << WordNumber(wordString, word) << " veces la palabra: " << word << endl;
+                    cout << "Se ha encontrado " << WordNumber(wordString, word) << " veces la palabra: " << word << endl;
                     break;
                 }
                 case 3: {
@@ -103,7 +103,7 @@ int main() {
                     string characters;
                     cout << "Ingrese los caracteres a eliminar:" << endl;
                     cin >> characters;
-                    cout << "Se han eliminado los caracteres " << characters << "de la oracion" << wordString << endl;
+                    cout << "Se han eliminado los caracteres " << characters << "de la oracion " << wordString << endl;
                     cout << "El resultado es: " << deleteCharacter(characters, wordString) << endl;
                     break;
                 }
